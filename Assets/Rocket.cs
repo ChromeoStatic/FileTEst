@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    Rigidbody rb; 
+    Rigidbody rb;
+    AudioSource rocket;
+    public float speed = 3.0f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rocket = GetComponent<AudioSource>();
+        
     }
 
     void Update()
@@ -21,11 +25,16 @@ public class Rocket : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space)) {
             rb.AddRelativeForce(Vector3.up);
+            if (rocket.isPlaying == false) {
+                rocket.Play();
+            }
+        } else {
+            rocket.Stop();
         }
         if (Input.GetKey(KeyCode.A)) {
-            Debug.Log("going left");
+            transform.Rotate(0,0,speed*Time.deltaTime);
         }else if (Input.GetKey(KeyCode.D)) {
-            Debug.Log("going right");
+            transform.Rotate(0,0,-speed*Time.deltaTime);
         }
     }
 }
