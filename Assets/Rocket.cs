@@ -42,7 +42,23 @@ public class Rocket : MonoBehaviour
         }else if (Input.GetKey(KeyCode.D)) {
             transform.Rotate(-velocityRot * Time.deltaTime);
         }
-
+         
         rb.freezeRotation = false;  //resume physics rotation 
     }
+
+    private void OnCollisionEnter(Collision collision) {
+        switch (collision.gameObject.tag) {
+            case "Friendly":
+                print("live");
+                break;
+            case "Fuel":
+                print("fuel up");
+                break;
+            default:
+                print("dead");
+                break;
+        }
+
+    }
+
 }
