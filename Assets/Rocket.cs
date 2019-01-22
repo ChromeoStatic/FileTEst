@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
+    Rigidbody rb; 
 
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -19,9 +20,8 @@ public class Rocket : MonoBehaviour
     private void ProcessInput() {
 
         if (Input.GetKey(KeyCode.Space)) {
-            Debug.Log("up and away");
+            rb.AddRelativeForce(Vector3.up);
         }
-
         if (Input.GetKey(KeyCode.A)) {
             Debug.Log("going left");
         }else if (Input.GetKey(KeyCode.D)) {
