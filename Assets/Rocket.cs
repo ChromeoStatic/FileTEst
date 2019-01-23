@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour {
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem deathParticles;
+    [SerializeField] ParticleSystem winParticles;
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip deathSound;
     [SerializeField] AudioClip winSound;
@@ -38,31 +41,34 @@ public class Rocket : MonoBehaviour {
             if (audioSource.isPlaying == false) {
                 audioSource.PlayOneShot(mainEngine);
             }
+            mainEngineParticles.Play();
         } else {
             audioSource.Stop();
+            mainEngineParticles.Stop();
         }
     }
     private void Rotate() {
 
         rb.freezeRotation = true;   //take manual control of rotation when used
-        
+
         if (Input.GetKey(KeyCode.A)) {
             transform.Rotate(velocityRot * Time.deltaTime);
-        }else if (Input.GetKey(KeyCode.D)) {
+        } else if (Input.GetKey(KeyCode.D)) {
             transform.Rotate(-velocityRot * Time.deltaTime);
         }
-         
+
         rb.freezeRotation = false;  //resume physics rotation 
     }
 
     private void OnCollisionEnter(Collision collision) {
 
         if (state != State.Alive) {
+            mainEngineParticles.Stop();
             return;                                             //Exit function if not palying
         }
-        
+
         switch (collision.gameObject.tag) {
-            
+
             case "Friendly":
                 //do nothing
                 break;
@@ -73,11 +79,13 @@ public class Rocket : MonoBehaviour {
                 audioSource.Stop();
                 state = State.Transcending;
                 audioSource.PlayOneShot(winSound);
+                winParticles.Play();
                 Invoke("LoadNextScene", timeToNextScene);
                 break;
             default:
                 state = State.Dying;
                 audioSource.Stop();
+                deathParticles.Play();
                 audioSource.PlayOneShot(deathSound, 0.3f);
                 Invoke("Restart", timeToNextScene);
                 break;

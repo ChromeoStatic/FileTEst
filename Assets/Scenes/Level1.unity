@@ -700,6 +700,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04ade395226c7af4fadd692048e330bf, type: 3}
+--- !u!198 &471427156741057942 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 471427156741057942, guid: ba36691e1812b2f46b2f4a66b0b04e79,
+    type: 3}
+  m_PrefabInstance: {fileID: 9203215802668179314}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2224391516506800324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1119,8 +1125,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2612333637051306667, guid: ba36691e1812b2f46b2f4a66b0b04e79,
         type: 3}
-      propertyPath: m_Volume
-      value: 0.36
+      propertyPath: BypassListenerEffects
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8617637226574991692, guid: ba36691e1812b2f46b2f4a66b0b04e79,
+        type: 3}
+      propertyPath: mainEngineParticles
+      value: 
+      objectReference: {fileID: 471427156741057942}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba36691e1812b2f46b2f4a66b0b04e79, type: 3}
