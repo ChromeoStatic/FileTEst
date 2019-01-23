@@ -613,8 +613,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca3ad0d3a1dfbc40b55bb70329d42b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainEngine: {fileID: 8300000, guid: c27b6899504171c458d2a08db0bcea55, type: 3}
+  deathSound: {fileID: 8300000, guid: e25f85df98fcdf04e83922c921ae4f48, type: 3}
+  winSound: {fileID: 8300000, guid: dba95e3359b06c542a2c219156bed878, type: 3}
   speed: {x: 0, y: 1000, z: 0}
   velocityRot: {x: 0, y: 0, z: 80}
+  timeToNextScene: 2
 --- !u!82 &2612333637051306667
 AudioSource:
   m_ObjectHideFlags: 0
@@ -625,7 +629,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3c7e498d116af5b458979161cdaebac6, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
