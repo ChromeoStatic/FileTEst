@@ -5,18 +5,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour {
-
     [SerializeField] ParticleSystem mainEngineParticles = null;
     [SerializeField] ParticleSystem deathParticles = null;
     [SerializeField] ParticleSystem winParticles = null;
-
     [SerializeField] AudioClip mainEngine = null;
     [SerializeField] AudioClip deathSound = null;
     [SerializeField] AudioClip winSound = null;
-
     Rigidbody rb;
     AudioSource audioSource;
-
     public Vector3 speed = new Vector3(0,1000.0f,0);
     public Vector3 velocityRot = new Vector3(0, 0, 80.0f);
     public float timeToNextScene = 2.0f;
