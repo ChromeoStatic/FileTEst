@@ -13,18 +13,18 @@ public class Rocket : MonoBehaviour {
     [SerializeField] AudioClip winSound = null;
     Rigidbody rb;
     AudioSource audioSource;
-    public Vector3 speed = new Vector3(0,1000.0f,0);
+    public Vector3 speed = new Vector3(0, 1000.0f, 0);
     public Vector3 velocityRot = new Vector3(0, 0, 80.0f);
     public float timeToNextScene = 2.0f;
-    enum State {Alive,Dying,Transcending};
+
+    enum State { Alive, Dying, Transcending };
     State state = State.Alive;
 
-    void Start()
-    {
-        
+    void Start() {
+
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-        
+
     }
 
     void Update() {
@@ -37,7 +37,7 @@ public class Rocket : MonoBehaviour {
 
     private void Thrust() {
         if (Input.GetKey(KeyCode.Space)) {
-            rb.AddRelativeForce(speed*Time.deltaTime);
+            rb.AddRelativeForce(speed * Time.deltaTime);
             if (audioSource.isPlaying == false) {
                 audioSource.PlayOneShot(mainEngine);
             }
@@ -94,11 +94,13 @@ public class Rocket : MonoBehaviour {
     }
 
     void Restart() {
-        
-        SceneManager.LoadScene(0);   
+
+        SceneManager.LoadScene(0);
     }
     void LoadNextScene() {
-        
-        SceneManager.LoadScene(1);
+        if (SceneManager.GetActiveScene().buildIndex < 3) {
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
+
