@@ -16,7 +16,7 @@ public class Rocket : MonoBehaviour {
     public Vector3 speed = new Vector3(0, 1000.0f, 0);
     public Vector3 velocityRot = new Vector3(0, 0, 80.0f);
     public float timeToNextScene = 2.0f;
-
+    public bool collisionDisabled = false;
     enum State { Alive, Dying, Transcending };
     State state = State.Alive;
 
@@ -29,11 +29,12 @@ public class Rocket : MonoBehaviour {
 
     void Update() {
         if (state == State.Alive) {
-
+            DebugKey();
             Thrust();
             Rotate();
         }
     }
+  
 
     private void Thrust() {
         if (Input.GetKey(KeyCode.Space)) {
@@ -62,7 +63,7 @@ public class Rocket : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
 
-        if (state != State.Alive) {
+        if (state != State.Alive || collisionDisabled) {
             mainEngineParticles.Stop();
             return;                                             //Exit function if not palying
         }
@@ -94,13 +95,19 @@ public class Rocket : MonoBehaviour {
     }
 
     void Restart() {
-
         SceneManager.LoadScene(0);
     }
     void LoadNextScene() {
-        if (SceneManager.GetActiveScene().buildIndex < 3) {
-        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    private void DebugKey() {
+        if (Input.GetKey(KeyCode.L)) {
+            LoadNextScene();
+        } else if (Input.GetKey(KeyCode.R)) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        } else if (Input.GetKey(KeyCode.C)) {
+            collisionDisabled = !collisionDisabled;
+        }
     }
 }
 
