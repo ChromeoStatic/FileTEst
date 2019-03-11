@@ -29,7 +29,7 @@ public class Rocket : MonoBehaviour {
 
     void Update() {
         if (state == State.Alive) {
-            DebugKey();
+            if (Debug.isDebugBuild) { DebugKey();}
             Thrust();
             Rotate();
         }
@@ -98,8 +98,15 @@ public class Rocket : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
     void LoadNextScene() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings-1) {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        } else {
+            SceneManager.LoadScene(0);
+        }
+
     }
+
     private void DebugKey() {
         if (Input.GetKey(KeyCode.L)) {
             LoadNextScene();
